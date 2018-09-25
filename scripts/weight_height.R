@@ -1,4 +1,5 @@
 library(BayesFactor)
+library(HDInterval)
 library(ggplot2)
 
 data <- read.csv("bayesian-data-analysis-in-r/data/weight_perception.csv")
@@ -29,4 +30,10 @@ bf_amain/bf_full
 post_amain <- posterior(bf_amain, iterations = 100000, thin=100)
 summary(post_amain)
 
-plot(post_amain)
+## compute HDI
+hdi_amain <- hdi(post_amain)
+
+## Plot posterior density and HDI
+plot(density(post_amain[,'Height:Gender-Female']))
+segments(hdi_amain[1, 'Height:Gender-Female'], 0, hdi_amain[2, 'Height:Gender-Female'], 0, lwd=2)
+
