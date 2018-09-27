@@ -8,7 +8,7 @@ intercept <- 3
 treat_b <- 0.5
 covar_b <- 0.1
 
-obs <- intercept + treat_b+treat + covar_b*covar + rnorm(length(treat), 0, sqrt(0.6))
+obs <- intercept + treat_b*treat + covar_b*covar + rnorm(length(treat), 0, sqrt(0.6))
 
 data <- data.frame(treatment=paste("treatment", (treat+1)/2+1), covariate=covar, observation=obs)
-write.csv(data, file="bayesian-data-analysis-in-r/data/regression_data.csv")
+write.csv(data, file="data/regression_data.csv")

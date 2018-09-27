@@ -27,7 +27,7 @@ genData <- function(n){
   b1_pop <- -2
   ## Group level sd of slopes
   b1_sd <- 1
-  b1 <- rnorm(1, -b1_pop, b1_sd)
+  b1 <- rnorm(1, b1_pop, b1_sd)
   
   ## Effect of condition is correlated with individual
   ## RT/accuracy trade-off

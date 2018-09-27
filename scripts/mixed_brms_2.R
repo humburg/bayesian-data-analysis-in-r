@@ -1,9 +1,15 @@
 ## Analyse simulated response/reaction time data
 library(brms)
+library(ggplot2)
 
 respRT <- read.csv("data/mixed_sim2.csv")
 
 respRT$Cond <- factor(respRT$Cond)
+respRT$Rsp <- factor(respRT$Rsp)
+
+## Plot data
+ggplot(respRT, aes(x=factor(Cond), y=RT, fill=factor(Rsp))) + geom_boxplot()
+
 
 ## Model 1: random intercept only
 ## Need save_all_pars = TRUE if we want to compute BAyes factors
@@ -31,15 +37,8 @@ m2 <- brm(Rsp ~ RT*Cond + (1|Sbj) + (0+RT+Cond|Sbj), data=respRT,
           family=bernoulli(), save_all_pars = TRUE)
 
 ## diagnostics
+plot(m2)
 launch_shinystan(m2)
 
-m2 <- brm(Rsp ~ RT*Cond + (1|Sbj) + (0+RT+Cond|Sbj), data=respRT,
-          iter=4000,cores=2, thin=2, control=list(adapt_delta=0.85),
-          family=bernoulli(), save_all_pars = TRUE)
-
-m2
-
-plot(m2)
-plot(marginal_effects(m2))
-
 bf20 <- bayes_factor(m2, m0, log=TRUE)
+
