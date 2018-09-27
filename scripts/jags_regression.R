@@ -11,8 +11,9 @@ jags <- jags.model('jags/simple_regression.jags',
 
 update(jags, 1000)
 
-jags.samples(jags,
-             c('a', 'b'),
-             1000)
+samples <- coda.samples(jags,
+                        c('a', 'b'),
+                        1000)
 
-
+summary(samples)
+plot(samples)

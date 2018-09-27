@@ -1,0 +1,18 @@
+model {
+  for (i in 1:N){
+    y[i] ~ dnorm(mu[i], tau)
+    mu[i] <- a + b1 * x1[i] + b2 * x2[i]
+  }
+  
+  # Priors
+  a ~ dnorm(0, 10^(-10))
+  b1 ~ dt(muB, tauB, tdfB)
+  b2 ~ dt(muB, tauB, tdfB)
+  tau ~ dgamma(0.01, 0.01)
+  
+  # Hyper priors
+  muB ~ dnorm(0, 0.1)
+  tauB ~ dgamma(0.01, 0.01)
+  tdfB <- 1 -log(1-udfB)
+  udfB ~ dunif(0, 1)
+}
