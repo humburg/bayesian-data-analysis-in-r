@@ -3,9 +3,8 @@ library(brms)
 library(ggplot2)
 
 respRT <- read.csv("data/mixed_sim1.csv")
-respRT$Rsp <- factor(respRT$Rsp)
 
-ggplot(respRT, aes(x=Rsp, y=RT)) + geom_boxplot()
+ggplot(respRT, aes(x=factor(Rsp), y=RT)) + geom_boxplot()
 
 
 ## Model 1: random intercept only

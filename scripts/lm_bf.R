@@ -1,7 +1,7 @@
 library(BayesFactor)
 library(HDInterval)
 
-data <- read.csv("bayesian-data-analysis-in-r/data/regression_data.csv")
+data <- read.csv("data/regression_data.csv")
 
 boxplot(data$observation ~ data$treatment)
 plot(data$covariate, data$observation)
